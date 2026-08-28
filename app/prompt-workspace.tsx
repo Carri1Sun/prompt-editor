@@ -533,7 +533,7 @@ export function PromptWorkspace() {
 
             <div className={`document-surface ${mode}`}>
               <div className="document-meta">
-                <span>PROMPT / WORKING COPY</span>
+                <span>工作副本</span>
                 <span>{content.length.toLocaleString('zh-CN')} 字符</span>
               </div>
               {mode === 'edit' ? (
@@ -672,7 +672,7 @@ export function PromptWorkspace() {
                   ) : (
                     <>
                       <div className="review-summary">
-                        <span>AI REVIEW · {reviewModel || 'QWEN'}</span>
+                        <span>AI 审阅 · {reviewModel || 'Qwen'}</span>
                         <p>{reviewSummary}</p>
                         {pendingSuggestionCount > 0 && (
                           <button type="button" onClick={acceptAllSuggestions}>全部采纳 · {pendingSuggestionCount}</button>
@@ -714,7 +714,7 @@ export function PromptWorkspace() {
 
             <footer className="review-footer">
               <div>
-                <span>QWEN TOKEN PLAN</span>
+                <span>审阅上下文</span>
                 <small>{comments.length} 条批注 · {content.length.toLocaleString('zh-CN')} 字符</small>
               </div>
               <button type="button" onClick={() => void analyzePrompt()} disabled={analyzing || !content.trim()}>
@@ -728,7 +728,7 @@ export function PromptWorkspace() {
           <Modal onClose={() => setShowTag(false)}>
             <section className="create-modal compact-modal" role="dialog" aria-modal="true" aria-labelledby="tag-title">
               <button className="modal-close" type="button" aria-label="关闭" onClick={() => setShowTag(false)}>×</button>
-              <p className="eyebrow">VERSION SNAPSHOT</p>
+              <p className="eyebrow">版本快照</p>
               <h2 id="tag-title">记录当前版本</h2>
               <p className="modal-intro">版本保存后不可编辑，但可以随时查看或创建副本。</p>
               <form onSubmit={recordVersion}>
@@ -751,7 +751,7 @@ export function PromptWorkspace() {
             <section className="version-dialog" role="dialog" aria-modal="true" aria-labelledby="versions-title">
               <header>
                 <div>
-                  <p className="eyebrow">VERSION HISTORY</p>
+                  <p className="eyebrow">版本历史</p>
                   <h2 id="versions-title">历史版本</h2>
                 </div>
                 <button className="modal-close static" type="button" aria-label="关闭" onClick={() => setShowVersions(false)}>×</button>
@@ -797,26 +797,16 @@ export function PromptWorkspace() {
   return (
     <main className="workspace-shell">
       <header className="topbar">
-        <div className="brand" aria-label="Prompt 工作台">
+        <div className="brand" aria-label="Prompt Library">
           <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
           <span>
-            <strong>Prompt 工作台</strong>
-            <small>把想法打磨成更好的指令</small>
+            <strong>Prompt Library</strong>
           </span>
         </div>
         <button className="primary-button" type="button" onClick={openCreateModal}>
           <span aria-hidden="true">＋</span>新建 Prompt
         </button>
       </header>
-
-      <section className="library-heading">
-        <div>
-          <p className="eyebrow">YOUR LIBRARY</p>
-          <h1>Prompt 项目</h1>
-          <p>在这里继续编辑、批注和保存每一版思考。</p>
-        </div>
-        <span className="project-count">{projects.length} 个项目</span>
-      </section>
 
       {libraryLoading ? (
         <section className="library-loading" aria-label="正在读取项目">
@@ -825,9 +815,8 @@ export function PromptWorkspace() {
       ) : projects.length === 0 ? (
         <section className="empty-library">
           <div className="empty-glyph" aria-hidden="true"><span>✦</span></div>
-          <p className="eyebrow">A QUIET START</p>
           <h2>从第一段 Prompt 开始</h2>
-          <p>这里还没有项目。创建一个工作区，把草稿、批注与版本放在一起。</p>
+          <p>创建一个项目，把草稿、批注与版本放进同一个工作区。</p>
           <button className="secondary-button" type="button" onClick={openCreateModal}>
             创建第一个项目 <span aria-hidden="true">→</span>
           </button>
@@ -854,14 +843,14 @@ export function PromptWorkspace() {
 
       <footer className="library-footer">
         <span><i className="status-dot" /> 5 秒差异自动保存</span>
-        <span>Prompt Workspace · Qwen Token Plan</span>
+        <span>Prompt 工作台</span>
       </footer>
 
       {showCreate && (
         <Modal onClose={() => setShowCreate(false)}>
           <section className="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-title">
             <button className="modal-close" type="button" aria-label="关闭" onClick={() => setShowCreate(false)}>×</button>
-            <p className="eyebrow">NEW PROJECT</p>
+            <p className="eyebrow">新建项目</p>
             <h2 id="create-title">创建 Prompt 项目</h2>
             <p className="modal-intro">给这次思考一个容易认出的名字。</p>
             <form onSubmit={createProject}>
